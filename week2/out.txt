@@ -1,0 +1,2 @@
+Enter something or Ctrl+D to stop: 
+You enter 7 characters
