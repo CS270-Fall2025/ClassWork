@@ -29,7 +29,7 @@ int main(int argc, char *argv[])
     openFlags = O_CREAT | O_WRONLY | O_TRUNC;
     filePerms = S_IRUSR | S_IWUSR | S_IRGRP | S_IWGRP | S_IROTH | S_IWOTH; /* rw-rw-rw- */
 
-    outputFd = open(argv[2], openFlags, filePerms);
+    outputFd = open(argv[2], openFlags, 666);
     if (outputFd == -1){
         perror("Openning output file");
         exit(1);
