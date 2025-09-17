@@ -18,21 +18,24 @@ int main(int argc, char *argv[])
         if (argc==2 && l==True){
             doLs(".", l);
         }
-        int i =1;
-        while(i<argc){
-            if (strncmp(argv[i], "-l", 2)!=0)
-            {
-                printf("\n%s:\n", argv[i]);
-                doLs(argv[i], l);   
-            }
-            
-        }
+        else{
+            int i =1;
+            while(i<argc){
+                if (strncmp(argv[i], "-l", 2)!=0)
+                {
+                    printf("\n%s:\n", argv[i]);
+                    doLs(argv[i], l);   
+                }
+                
+            } 
+        }        
     }
 }
 /**
  * @brief List file in directory 
  * 
  * @param dirName name of directory
+ * @param l -l flag. if 1 display long information for the file
  */
 void doLs(const char * dirName, int l)
 {
