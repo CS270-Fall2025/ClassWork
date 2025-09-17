@@ -35,6 +35,10 @@
 *.i*86
 *.x86_64
 *.hex
+week5/ls1
+week5/ls2
+week5/ls3
+week5/ls4
 
 # Debug files
 *.dSYM/
