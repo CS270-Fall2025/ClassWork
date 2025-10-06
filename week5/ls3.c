@@ -4,6 +4,9 @@
 #include <string.h>
 #include <fcntl.h> 
 #include <sys/sysmacros.h>
+#include <pwd.h>
+#include <grp.h> 
+#include <time.h>
 #define True 1
 #define False 0;
 
@@ -54,7 +57,7 @@ void doLs(const char * dirName, int l)
                 if (l){
                     struct stat info;
                     printf("%s\n", pEntry->d_name);
-                    stat(pEntry->d_name, &info);
+                    lstat(pEntry->d_name, &info);
                     showStatInfo(pEntry->d_name, &info);
                 }else{
                     printf("%s\n", pEntry->d_name);
@@ -67,14 +70,22 @@ void doLs(const char * dirName, int l)
 void showStatInfo(const char *fname, struct stat *buf)
 {
     printf("   mode: %o\n", buf->st_mode);
-    char mode_str[11]="-----------";
+    char mode_str[11]="----------";
     getMode(buf->st_mode, mode_str);
     printf("   mode: %s\n", mode_str);//"-wre--e---e"
     printf("   links: %ld\n", buf->st_nlink);
+
     printf("   user: %d\n", buf->st_uid);
+    printf("   user: %s\n", getpwuid(buf->st_uid)->pw_name);
+    
     printf("   group: %d\n", buf->st_gid);
+    printf("   group: %s\n", getgrgid(buf->st_gid)->gr_name);
+
     printf("   size: %ld\n", buf->st_size);
+
     printf("   modtime: %ld\n", buf->st_mtime);
+    printf("   modtime: %.12s\n", 4+ ctime(&buf->st_mtime));
+
     printf("   name: %s\n", fname);
 }
 
